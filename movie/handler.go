@@ -11,7 +11,7 @@ import (
 var db = database.GetDB()
 
 func Config(api *gin.RouterGroup) {
-	_ = db.DB.AutoMigrate(&movie{})
+	_ = db.DB.AutoMigrate(&Movie{})
 	api.GET("/movies", findAll)
 	api.POST("/movies", create)
 	api.GET("/movies/:id", findById)
@@ -74,7 +74,7 @@ func findAll(c *gin.Context) {
 
 func findById(c *gin.Context) {
 	id := c.Param("id")
-	var m movie
+	var m Movie
 
 	dbWhereErr := db.DB.Where("id = ?", id).First(&m).Error
 	if dbWhereErr != nil {
@@ -96,7 +96,7 @@ func update(c *gin.Context) {
 		return
 	}
 
-	var m movie
+	var m Movie
 
 	dbWhereErr := db.DB.Where("id = ?", id).First(&m).Error
 	if dbWhereErr != nil {
@@ -123,7 +123,7 @@ func update(c *gin.Context) {
 
 func remove(c *gin.Context) {
 	id := c.Param("id")
-	var m movie
+	var m Movie
 
 	dbWhereErr := db.DB.Where("id = ?", id).First(&m).Error
 	if dbWhereErr != nil {

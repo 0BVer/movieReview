@@ -6,8 +6,8 @@ type createRequest struct {
 	Comment string `json:"comment" binding:"required"`
 }
 
-func (r createRequest) toEntity() review {
-	return review{
+func (r createRequest) toEntity() Review {
+	return Review{
 		MovieID: r.MovieID,
 		Score:   r.Score,
 		Comment: r.Comment,

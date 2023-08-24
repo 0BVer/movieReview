@@ -13,7 +13,7 @@ type response struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
-func (m review) fromEntity() response {
+func (m Review) fromEntity() response {
 	return response{
 		ID:        m.ID,
 		MovieID:   m.MovieID,

@@ -15,7 +15,7 @@ type response struct {
 	UpdatedAt  time.Time `json:"updatedAt"`
 }
 
-func (m movie) fromEntity() response {
+func (m Movie) fromEntity() response {
 	return response{
 		ID:         m.ID,
 		Title:      m.Title,

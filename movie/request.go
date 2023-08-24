@@ -9,8 +9,8 @@ type createRequest struct {
 	EndAt      time.Time `form:"endAt" binding:"required"`
 }
 
-func (r createRequest) toEntity() movie {
-	return movie{
+func (r createRequest) toEntity() Movie {
+	return Movie{
 		Title:      r.Title,
 		Genre:      r.Genre,
 		IsShowing:  r.ReleasedAt.Before(time.Now()) && r.EndAt.After(time.Now()),

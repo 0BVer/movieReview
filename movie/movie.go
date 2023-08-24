@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type movie struct {
+type Movie struct {
 	gorm.Model
 	Title      string `gorm:"uniqueKey"`
 	Genre      string

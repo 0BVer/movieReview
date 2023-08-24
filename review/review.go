@@ -2,12 +2,14 @@ package review
 
 import (
 	"gorm.io/gorm"
+	"movieReview/movie"
 	"time"
 )
 
-type review struct {
+type Review struct {
 	gorm.Model
-	MovieID   uint `gorm:"foreignKey:MovieID"` // foreign key
+	MovieID   uint `gorm:"foreignKey:MovieID"`
+	Movie     movie.Movie
 	Score     int
 	Comment   string
 	CreatedAt time.Time `gorm:"autoCreateTime"`

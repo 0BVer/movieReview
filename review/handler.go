@@ -10,7 +10,7 @@ import (
 var db = database.GetDB()
 
 func Config(api *gin.RouterGroup) {
-	_ = db.DB.AutoMigrate(&review{})
+	_ = db.DB.AutoMigrate(&Review{})
 	api.POST("/reviews", create)
 	api.GET("/reviews", findAllByMovieId)
 }
