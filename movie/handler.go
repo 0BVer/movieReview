@@ -143,7 +143,7 @@ func remove(c *gin.Context) {
 
 // TODO: Implement this function
 func findAllByScore(c *gin.Context) {
-	var res []response
+	var res []scoreRankResponse
 
 	var params paginationParams
 
@@ -155,11 +155,12 @@ func findAllByScore(c *gin.Context) {
 	}
 
 	dbFindAllErr := db.DB.Raw(
-		"SELECT * "+
+		"SELECT movies.*, AVG(reviews.score) as ScoreAvg "+
 			"FROM movies "+
-			"ORDER BY ? ? "+
+			"LEFT JOIN reviews ON movies.id = reviews.movie_id "+
+			"GROUP BY movies.id "+
+			"ORDER BY ScoreAvg DESC "+
 			"LIMIT ? OFFSET ?",
-		params.SortBy, params.Sort,
 		params.Size, params.Page*params.Size,
 	).Scan(&res).Error
 	if dbFindAllErr != nil {

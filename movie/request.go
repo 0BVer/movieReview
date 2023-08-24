@@ -25,8 +25,6 @@ type findAllParams struct {
 }
 
 type paginationParams struct {
-	Page   int    `form:"page" binding:"omitempty,min=0"`
-	Size   int    `form:"size" binding:"omitempty,min=1,max=100"`
-	SortBy string `form:"sortBy" binding:"omitempty,oneof=id title genre releasedAt endAt" default:"id"`
-	Sort   string `form:"sort" binding:"omitempty,oneof=asc desc" default:"asc"`
+	Page int `form:"page" binding:"omitempty,min=0"`
+	Size int `form:"size" binding:"omitempty,min=1,max=100"`
 }
