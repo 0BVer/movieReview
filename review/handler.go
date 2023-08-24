@@ -21,7 +21,7 @@ func create(c *gin.Context) {
 	shouldBindErr := c.ShouldBind(&req)
 	if shouldBindErr != nil {
 		log.Println(shouldBindErr)
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": shouldBindErrMsg})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": shouldBindErrMsg + " " + shouldBindErr.Error()})
 		return
 	}
 
@@ -30,7 +30,7 @@ func create(c *gin.Context) {
 	dbCreateErr := db.DB.Create(&m).Error
 	if dbCreateErr != nil {
 		log.Println(dbCreateErr)
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbCreateErrMsg})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbCreateErrMsg + " " + dbCreateErr.Error()})
 		return
 	}
 
@@ -44,7 +44,7 @@ func findAllByMovieId(c *gin.Context) {
 	bindQueryErr := c.BindQuery(&params)
 	if bindQueryErr != nil {
 		log.Println(bindQueryErr)
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": bindQueryErrMsg})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": bindQueryErrMsg + " " + bindQueryErr.Error()})
 		return
 	}
 
@@ -60,7 +60,7 @@ func findAllByMovieId(c *gin.Context) {
 	).Scan(&res).Error
 	if dbFindAllErr != nil {
 		log.Println(dbFindAllErr)
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbFindAllErrMsg})
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbFindAllErrMsg + " " + dbFindAllErr.Error()})
 		return
 	}
 

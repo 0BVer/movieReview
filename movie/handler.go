@@ -26,7 +26,7 @@ func create(c *gin.Context) {
 	shouldBindErr := c.ShouldBind(&req)
 	if shouldBindErr != nil {
 		log.Println(shouldBindErr)
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": shouldBindErrMsg})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": shouldBindErrMsg + " " + shouldBindErr.Error()})
 		return
 	}
 
@@ -35,7 +35,7 @@ func create(c *gin.Context) {
 	dbCreateErr := db.DB.Create(&m).Error
 	if dbCreateErr != nil {
 		log.Println(dbCreateErr)
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbCreateErrMsg})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbCreateErrMsg + " " + dbCreateErr.Error()})
 		return
 	}
 
@@ -49,7 +49,7 @@ func findAll(c *gin.Context) {
 	bindQueryErr := c.BindQuery(&params)
 	if bindQueryErr != nil {
 		log.Println(bindQueryErr)
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": bindQueryErrMsg})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": bindQueryErrMsg + " " + bindQueryErr.Error()})
 		return
 	}
 
@@ -65,7 +65,7 @@ func findAll(c *gin.Context) {
 	).Scan(&res).Error
 	if dbFindAllErr != nil {
 		log.Println(dbFindAllErr)
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbFindAllErrMsg})
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbFindAllErrMsg + " " + dbFindAllErr.Error()})
 		return
 	}
 
@@ -79,7 +79,7 @@ func findById(c *gin.Context) {
 	dbWhereErr := db.DB.Where("id = ?", id).First(&m).Error
 	if dbWhereErr != nil {
 		log.Println(dbWhereErr)
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbWhereErrMsg})
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbWhereErrMsg + " " + dbWhereErr.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, m.fromEntity())
@@ -92,7 +92,7 @@ func update(c *gin.Context) {
 	shouldBindErr := c.ShouldBind(&req)
 	if shouldBindErr != nil {
 		log.Println(shouldBindErr)
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": shouldBindErrMsg})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": shouldBindErrMsg + " " + shouldBindErr.Error()})
 		return
 	}
 
@@ -101,7 +101,7 @@ func update(c *gin.Context) {
 	dbWhereErr := db.DB.Where("id = ?", id).First(&m).Error
 	if dbWhereErr != nil {
 		log.Println(dbWhereErr)
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbWhereErrMsg})
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbWhereErrMsg + " " + dbWhereErr.Error()})
 		return
 	}
 
@@ -114,7 +114,7 @@ func update(c *gin.Context) {
 	dbSaveErr := db.DB.Save(&m).Error
 	if dbSaveErr != nil {
 		log.Println(dbSaveErr)
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbSaveErrMsg})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbSaveErrMsg + " " + dbSaveErr.Error()})
 		return
 	}
 
@@ -128,13 +128,13 @@ func remove(c *gin.Context) {
 	dbWhereErr := db.DB.Where("id = ?", id).First(&m).Error
 	if dbWhereErr != nil {
 		log.Println(dbWhereErr)
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbWhereErrMsg})
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbWhereErrMsg + " " + dbWhereErr.Error()})
 		return
 	}
 
 	dbDeleteErr := db.DB.Delete(&m).Error
 	if dbDeleteErr != nil {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbDeleteErrMsg})
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": dbDeleteErrMsg + " " + dbDeleteErr.Error()})
 		return
 	}
 
@@ -150,7 +150,7 @@ func findAllByScore(c *gin.Context) {
 	bindQueryErr := c.BindQuery(&params)
 	if bindQueryErr != nil {
 		log.Println(bindQueryErr)
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": bindQueryErrMsg})
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": bindQueryErrMsg + " " + bindQueryErr.Error()})
 		return
 	}
 
@@ -165,7 +165,7 @@ func findAllByScore(c *gin.Context) {
 	).Scan(&res).Error
 	if dbFindAllErr != nil {
 		log.Println(dbFindAllErr)
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbFindAllErrMsg})
+		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": dbFindAllErrMsg + " " + dbFindAllErr.Error()})
 		return
 	}
 
