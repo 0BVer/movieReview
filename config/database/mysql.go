@@ -7,11 +7,9 @@ import (
 	"movieReview/config/env"
 )
 
-type Database struct {
-	DB *gorm.DB
-}
+func GetMysql() *gorm.DB {
+	env.LoadEnv()
 
-func newDatabase() Database {
 	USER := env.GetEnv("DB_USER", "root")
 	PASS := env.GetEnv("MYSQL_ROOT_PASSWORD", "password")
 	HOST := env.GetEnv("DB_HOST", "localhost")
@@ -26,12 +24,6 @@ func newDatabase() Database {
 	} else {
 		fmt.Println("Database connection established")
 	}
-	return Database{
-		DB: db,
-	}
-}
 
-func GetDB() Database {
-	env.LoadEnv()
-	return newDatabase()
+	return db
 }

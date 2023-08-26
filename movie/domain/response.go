@@ -1,10 +1,10 @@
-package movie
+package domain
 
 import (
 	"time"
 )
 
-type response struct {
+type Response struct {
 	ID         uint      `json:"id"`
 	Title      string    `json:"title"`
 	Genre      string    `json:"genre"`
@@ -15,8 +15,8 @@ type response struct {
 	UpdatedAt  time.Time `json:"updatedAt"`
 }
 
-func (m Movie) fromEntity() response {
-	return response{
+func (m Movie) FromEntity() Response {
+	return Response{
 		ID:         m.ID,
 		Title:      m.Title,
 		Genre:      m.Genre,
@@ -28,7 +28,7 @@ func (m Movie) fromEntity() response {
 	}
 }
 
-type scoreRankResponse struct {
+type ScoreRankResponse struct {
 	ID         uint      `json:"id"`
 	Title      string    `json:"title"`
 	Genre      string    `json:"genre"`

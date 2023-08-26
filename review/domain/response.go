@@ -1,10 +1,10 @@
-package review
+package domain
 
 import (
 	"time"
 )
 
-type response struct {
+type Response struct {
 	ID        uint      `json:"id"`
 	MovieID   uint      `json:"movieId"`
 	Score     int       `json:"score"`
@@ -13,8 +13,8 @@ type response struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
-func (m Review) fromEntity() response {
-	return response{
+func (m Review) FromEntity() Response {
+	return Response{
 		ID:        m.ID,
 		MovieID:   m.MovieID,
 		Score:     m.Score,

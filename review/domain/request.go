@@ -1,12 +1,12 @@
-package review
+package domain
 
-type createRequest struct {
+type CreateRequest struct {
 	MovieID uint   `json:"movieID" binding:"required"`
 	Score   int    `json:"score" binding:"required,min=0,max=5"`
 	Comment string `json:"comment" binding:"required"`
 }
 
-func (r createRequest) toEntity() Review {
+func (r CreateRequest) ToEntity() Review {
 	return Review{
 		MovieID: r.MovieID,
 		Score:   r.Score,
@@ -14,7 +14,7 @@ func (r createRequest) toEntity() Review {
 	}
 }
 
-type findAllParams struct {
+type FindAllParams struct {
 	MovieID  uint `form:"movieId" binding:"omitempty"`
 	ScoreCap int  `form:"scoreCap" binding:"omitempty,min=0,max=5"`
 }
