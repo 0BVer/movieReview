@@ -18,6 +18,7 @@ type Movie struct {
 	DeletedAt  gorm.DeletedAt
 }
 
+//go:generate mockery --name MovieRepository
 type MovieRepository interface {
 	Create(movie Movie) (Movie, error)
 	FindAll(params FindAllParams) ([]Response, error)
@@ -27,6 +28,7 @@ type MovieRepository interface {
 	FindAllByScore(params PaginationParams) ([]ScoreRankResponse, error)
 }
 
+//go:generate mockery --name MovieUseCase
 type MovieUseCase interface {
 	Create(req CreateRequest) (Response, error)
 	FindAll(params FindAllParams) ([]Response, error)
@@ -36,6 +38,7 @@ type MovieUseCase interface {
 	FindAllByScore(params PaginationParams) ([]ScoreRankResponse, error)
 }
 
+//go:generate mockery --name MovieDelivery
 type MovieDelivery interface {
 	Create(c *gin.Context)
 	FindAll(c *gin.Context)

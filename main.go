@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -21,6 +22,10 @@ import (
 // @BasePath /api/v1
 func main() {
 	r := gin.Default()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	r.Use(cors.New(config))
+
 	v1 := r.Group("/api/v1")
 
 	v1.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
