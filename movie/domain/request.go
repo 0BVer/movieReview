@@ -27,6 +27,6 @@ type FindAllParams struct {
 }
 
 type PaginationParams struct {
-	Page int `form:"page" binding:"omitempty,min=0"`
-	Size int `form:"size" binding:"omitempty,min=1,max=100"`
+	Page int `form:"page" binding:"required,min=0"`
+	Size int `form:"size" binding:"required,min=1,max=100"`
 }
