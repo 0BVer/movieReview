@@ -35,7 +35,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "IsShowing",
-                        "name": "is_showing",
+                        "name": "isShowing",
                         "in": "query"
                     }
                 ],
@@ -297,9 +297,14 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Movie ID",
-                        "name": "movie_id",
-                        "in": "query",
-                        "required": true
+                        "name": "movieId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Score Cap",
+                        "name": "scoreCap",
+                        "in": "query"
                     }
                 ],
                 "responses": {

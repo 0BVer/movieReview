@@ -56,7 +56,7 @@ func (d *Delivery) Create(c *gin.Context) {
 // @Tags movies
 // @Produce json
 // @Param genre query string false "Genre"
-// @Param is_showing query string false "IsShowing"
+// @Param isShowing query string false "IsShowing"
 // @Success 200 {array} domain.Response
 // @Failure 400 {object} map[string]any
 // @Failure 500 {object} map[string]any

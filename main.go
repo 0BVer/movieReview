@@ -27,7 +27,6 @@ func main() {
 	r.Use(cors.New(config))
 
 	v1 := r.Group("/api/v1")
-
 	v1.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	db := database.GetMysql()

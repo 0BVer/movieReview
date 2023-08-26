@@ -51,7 +51,8 @@ func (d *Delivery) Create(c *gin.Context) {
 // @Description Find all reviews by movie id
 // @Tags reviews
 // @Produce json
-// @Param movie_id query string true "Movie ID"
+// @Param movieId query string false "Movie ID"
+// @Param scoreCap query string false "Score Cap"
 // @Success 200 {array} domain.Response
 // @Failure 400 {object} map[string]any
 // @Failure 404 {object} map[string]any
